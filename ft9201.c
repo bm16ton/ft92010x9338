@@ -341,26 +341,7 @@ int ret2;
 		int retval;
 		int poo = 0;
 unsigned char local_value[4];
-	while(poo == 0) {
-	retval = usb_control_msg_recv(
-			dev->udev,
-			0,
-			FT9201_REQ_READ_REGISTERS,
-			USB_DIR_IN | USB_TYPE_VENDOR | USB_RECIP_DEVICE,
-			0,
-			0,
-			&local_value,
-			sizeof(local_value),
-			5000,
-			GFP_KERNEL);
 
-	if (retval) {
-		dev_info(&dev->interface->dev, "Error sending data: %d\n", retval);
-		return retval;
-		}
-
-	poo = local_value[0];
-	}
 
 	retval = usb_control_msg_send(
 			dev->udev,
@@ -410,6 +391,29 @@ unsigned char local_value[4];
 	if (retval) {
 		dev_info(&dev->interface->dev, "Error sending control data 3: %d\n", retval);
 		return retval;
+	}
+
+	while(poo == 0) {
+	retval = usb_control_msg_recv(
+			dev->udev,
+			0,
+			FT9201_REQ_READ_REGISTERS,
+			USB_DIR_IN | USB_TYPE_VENDOR | USB_RECIP_DEVICE,
+			0,
+			0,
+			&local_value,
+			sizeof(local_value),
+			5000,
+			GFP_KERNEL);
+
+	if (retval) {
+		dev_info(&dev->interface->dev, "Error sending data: %d\n", retval);
+		return retval;
+		}
+
+//	dev_info(&dev->interface->dev, "read registers returned: %d %d %d %d\n", local_value[0], local_value[1], local_value[2], local_value[3]);
+
+	poo = local_value[0];
 	}
 
 	ret = ft9201_read_image(dev);
