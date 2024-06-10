@@ -333,6 +333,7 @@ int ret2;
 		if ((ret == -ERESTARTSYS) || (dev->timetoexit == true)){
 			// We were interrupted by a signal
 			dev->timetoexit = false;
+			mutex_unlock(&dev->io_mutex);
 			pr_info("Done reading fingerprint closing");
 			ret = 0;
 			break;
