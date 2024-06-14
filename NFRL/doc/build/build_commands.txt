@@ -1,0 +1,35 @@
+
+## Windows
+Build output may be redirected to any convenient dir by utilizing the '-B' switch for the 'cmake' command.
+For the Windows examples below, build output is redirected to RAMDRIVE (R:\).  A nice tool to create RAMDRIVE for
+Windows is OFSMount (osforensics.com).
+
+From the './build' subdir, open PowerShell terminal:
+
+NFRL core:
+cmake -S .. -B R:\NFRL_core -DCMAKE_CONFIGURATION_TYPES="Release"
+MSBuild.exe R:\NFRL_core\nfrl_core.sln
+
+NFRL opencv:
+cmake -S .. -B R:\NFRL_opencv -DCMAKE_CONFIGURATION_TYPES="Release" -DUSE_OPENCV=1
+MSBuild.exe R:\NFRL_opencv\nfrl_opencv.sln
+
+Library files are located here on successful build:
+./NFRL_core/src/lib/Release/nfrl_core.lib
+./NFRL_opencv/src/lib/Release/nfrl_opencv.lib
+
+
+## Linux
+In a terminal, navigate to the './build' subdir:
+
+NFRL core:
+cmake ..
+make
+
+NFRL opencv:
+cmake -DUSE_OPENCV=1 ..
+make
+
+Library files are located here on successful build:
+./src/lib/libnfrl_opencv.a
+./src/lib/libnfrl_core.a

@@ -1,0 +1,1 @@
+gcc -I/usr/include/ImageMagick-6 -I/usr/include/x86_64-linux-gnu/ImageMagick-6 util_main.c -o ./ft9201_util -L/usr/lib/x86_64-linux-gnu -lMagickWand-6.Q16

@@ -1,0 +1,132 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="registration_metadata">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="translation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="affine_transform">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:byte" name="rows"/>
+                    <xs:element type="xs:byte" name="cols"/>
+                    <xs:element type="xs:string" name="row" maxOccurs="unbounded" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="rotation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="affine_transform">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:byte" name="rows"/>
+                    <xs:element type="xs:byte" name="cols"/>
+                    <xs:element type="xs:string" name="row" maxOccurs="unbounded" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:float" name="angle"/>
+              <xs:element type="xs:string" name="center_of_rotation"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="registration_control_points">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="fixed_image">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="constrained_point"/>
+                    <xs:element type="xs:string" name="unconstrained_point"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="moving_image">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="constrained_point"/>
+                    <xs:element type="xs:string" name="unconstrained_point"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="euclidean_distance">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:float" name="constrained_pair"/>
+                    <xs:element type="xs:float" name="unconstrained_pair"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="scale_factor">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:float" name="value"/>
+              <xs:element type="xs:string" name="direction"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="image_size">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="src_moving">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:short" name="width"/>
+                    <xs:element type="xs:short" name="height"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="src_fixed">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:short" name="width"/>
+                    <xs:element type="xs:short" name="height"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="transform_padded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:short" name="width"/>
+                    <xs:element type="xs:short" name="height"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="registered">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:short" name="width"/>
+                    <xs:element type="xs:short" name="height"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="convert_gray">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="src_moving"/>
+              <xs:element type="xs:string" name="src_fixed"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="overlap_roi">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="top_left"/>
+              <xs:element type="xs:string" name="bot_right"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

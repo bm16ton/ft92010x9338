@@ -1,0 +1,8 @@
+/doc/html
+/doc/rtf
+/doc/*.docx
+/bin
+/obj
+/lib
+/.vscode
+/build

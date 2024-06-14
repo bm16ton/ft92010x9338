@@ -274,10 +274,12 @@ static ssize_t send_read_data(struct ft9201_device *dev, char __user *buf, size_
 	dev_info(&dev->interface->dev, "Copied: %lu, to_copy: %lu, full_size: %lu", dev->img_in_copied, to_copy, dev->img_in_size);
 
 	if (dev->img_in_copied + to_copy > dev->img_in_size) {
+		dev_info(&dev->interface->dev, "error img_in_copied + to_copy > dev->img_in_size");
 		return -EINVAL;
 	}
 
 	if (copy_to_user(buf, dev->read_img_data + dev->img_in_copied, to_copy)) {
+		dev_info(&dev->interface->dev, "error copy_to_user");
 		return -EFAULT;
 	}
 	dev->img_in_copied += to_copy;
@@ -537,6 +539,9 @@ static void ft9201_disconnect(struct usb_interface *interface) {
 	pr_info("Disconnect");
 
 	dev = usb_get_intfdata(interface);
+	if (mutex_is_locked(&dev->io_mutex) == 1) {
+		mutex_unlock(&dev->io_mutex);
+	}
 	pr_info("Disconnect");
 	usb_set_intfdata(interface, NULL);
 
